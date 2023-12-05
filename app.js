@@ -8,7 +8,7 @@ const dbPath = path.join(__dirname, "cricketTeam.db");
 const initializeDBAndServer = async () => {
   try {
     db = await open({
-      filename: "cricketTeam.db",
+      filename: dbPath,
       driver: sqlite3.Database,
     });
     app.listen(3000, () => {
@@ -141,7 +141,7 @@ app.put("/todos/:todoId/", async (request, response) => {
 app.delete("/todos/:todoId/", async (request, response) => {
   const { id } = request.params;
   const deleteQuery = `DELETE FROM todo
-    WHERE id = ${todoId}`;
+    WHERE id = ${id}`;
   await db.run(deleteQuery);
   response.send("Todo Deleted");
 });
